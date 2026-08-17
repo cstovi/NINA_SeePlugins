@@ -1,0 +1,89 @@
+{
+  "$comment": "Static data/config for the NINA combined plugin repository. Each entry lists a plugin repo and its exact metadata (GUID/identifier, author, descriptions, etc.) sourced from that repo's Properties/AssemblyInfo.cs. Version, download URL and checksum are NOT stored here - they are resolved at generation time from the repo's latest GitHub release by scripts/generate-manifests.mjs. 'transitional' marks a plugin whose release is not yet a proper .zip (e.g. currently ships only a .dll); transitional plugins are allowed to be skipped with a warning instead of failing the build when a release asset or checksum is unavailable.",
+  "plugins": [
+    {
+      "repo": "cstovi/NINA_SeeDew",
+      "name": "SeeDew",
+      "identifier": "1B307E89-2157-4DFB-BFCA-A3ED3A58E272",
+      "author": "Carl Stovell",
+      "homepage": "https://ko-fi.com/turnpike47298",
+      "repository": "https://github.com/cstovi/NINA_SeeDew",
+      "license": "MPL-2.0",
+      "licenseUrl": "https://www.mozilla.org/MPL/2.0/",
+      "changelogUrl": "https://github.com/cstovi/NINA_SeeDew/releases",
+      "tags": ["Seestar", "dew", "heater", "weather", "automation"],
+      "minimumApplicationVersion": "3.0.0.1001",
+      "descriptions": {
+        "shortDescription": "Automatically turns the Seestar dew heater on and off based on temperature/dew point margin.",
+        "longDescription": "SeeDew monitors the dew point margin (temperature minus dew point) using NINA's connected weather device and automatically controls the Seestar's dew heater via its Alpaca REST API.\n\nThe heater turns ON when the margin drops below a configurable threshold (default 3.5°C) and turns OFF when it rises above another threshold (default 5.0°C), preventing dew and frost on the optics without manual intervention.\n\nFeatures:\n- Integrates with any weather device already connected in NINA\n- Direct Alpaca control of the Seestar heater switch — no extra device setup required\n- Live status panel in the imaging tab showing temperature, dew point, margin, and heater state\n- Optional Discord webhook notifications on heater state changes (log is always written to %LOCALAPPDATA%\\NINA\\SeeDew\\seedew.log)\n- Auto-starts with NINA; cleanly shuts the heater off when NINA closes\n\nThanks to @Astrowook for ideas, skills and laughs\n\nIf you use and like anything I've done, support on Ko-fi (https://ko-fi.com/turnpike47298) is appreciated to encourage me to keep going!",
+        "featuredImageUrl": "https://i.ibb.co/jkMX7y6m/See-Dew.png",
+        "screenshotUrl": "",
+        "altScreenshotUrl": ""
+      },
+      "transitional": false
+    },
+    {
+      "repo": "cstovi/NINA_SeeDark",
+      "name": "SeeDark",
+      "identifier": "A5E7F3C1-2D4B-4A8E-9F1C-3B6D7E8A0F2C",
+      "author": "Carl Stovell",
+      "homepage": "https://ko-fi.com/turnpike47298",
+      "repository": "https://github.com/cstovi/NINA_SeeDark",
+      "license": "MPL-2.0",
+      "licenseUrl": "https://www.mozilla.org/MPL/2.0/",
+      "changelogUrl": "https://github.com/cstovi/NINA_SeeDark/releases",
+      "tags": ["Seestar", "dark", "master", "calibration"],
+      "minimumApplicationVersion": "3.0.0.1001",
+      "descriptions": {
+        "shortDescription": "Captures master darks only when needed for the current sensor temperature, gain, and exposure — skips automatically when a fresh master exists. Includes a stacker to build median masters from raw darks.",
+        "longDescription": "SeeDark Dark Manager\n\nAdd a SeeDark Dark Manager container anywhere in your NINA sequence. Each time it runs, it reads the current sensor temperature, maps it to the nearest temperature band (2°C or 3°C, configurable), and checks whether a fresh master dark already exists for that band, gain, and exposure.\n\nAlready covered — the container skips silently and your sequence continues. Missing or stale — it automatically captures 30 dark frames in the correct band. Proactive warmup — if the current band is already covered but the next warmer band isn't, SeeDark starts capturing immediately, counting frames once the sensor reaches the target band.\n\nEach container has its own exposure and gain settings, so you can run multiple containers for different imaging configurations in the same sequence.\n\nSeeDark Stack Master Darks\n\nAdd this instruction to build masters from raws. It scans the resolved raw-dark root under NINA image file path (DARK subtree when your pattern uses `$$IMAGETYPE$$` as a folder, otherwise the full path), groups frames by temperature band, gain, and exposure, and writes a per-pixel median master FITS for each group that is missing or stale — leaving fresh masters untouched.\n\nAn optional Discord webhook mirrors key events (skip decisions, capture results, stack completions) to a channel of your choice. A second general-purpose webhook can be set for minimal start/stop notifications.\n\nCredit to @Ettaswell-Jon for single handedly exposing all the bugs in early versions!\n\nIf you use and like anything I've done, support on Ko-fi (https://ko-fi.com/turnpike47298) is appreciated to encourage me to keep going!",
+        "featuredImageUrl": "https://i.ibb.co/NdXb8D39/seedark.png",
+        "screenshotUrl": "",
+        "altScreenshotUrl": ""
+      },
+      "transitional": true
+    },
+    {
+      "repo": "cstovi/NINA_SeeDither",
+      "name": "SeeDither",
+      "identifier": "c4d2e5a1-7b3f-4e9d-9f2a-6f1c8b9a3d11",
+      "author": "Carl S.",
+      "homepage": "https://ko-fi.com/turnpike47298",
+      "repository": "https://github.com/cstovi/NINA_SeeDither",
+      "license": "MPL-2.0",
+      "licenseUrl": "https://www.mozilla.org/en-US/MPL/2.0/",
+      "changelogUrl": "https://github.com/cstovi/NINA_SeeDither/releases",
+      "tags": ["Seestar", "dither", "guiding", "mount"],
+      "minimumApplicationVersion": "3.2.0.9001",
+      "descriptions": {
+        "shortDescription": "Absolute GoTo coordinate-offset dithering for Seestar S30/S50 mounts.",
+        "longDescription": "Performs random absolute-coordinate dithering after exposures, designed for Seestar mounts whose guide pulses are unreliable.\n\nHopefully ZWO can address what some of us have found appear to be dithering issues (e.g. not using both RA and DEC axes effectively). If you experience dithering problems in the Seestar app or in the NINA Seestar ASCOM Alpaca setup, it's always best to report them so ZWO is aware.\n\nThis plugin presents a basic, alternative way to get some RA and DEC dithering for Seestars, and is hopefully a temporary measure until ZWO can address it long-term.\n\nIf you use and like anything I've done, support on Ko-fi (https://ko-fi.com/turnpike47298) is appreciated to encourage me to keep going!",
+        "featuredImageUrl": "https://i.ibb.co/v6C6vXjp/seedither.jpg",
+        "screenshotUrl": "",
+        "altScreenshotUrl": ""
+      },
+      "transitional": true
+    },
+    {
+      "repo": "cstovi/NINA_SeeDrift",
+      "name": "SeeDrift",
+      "identifier": "E8D4C2F1-6B7A-4E9D-8C3F-1A2B5D7E9F0C",
+      "author": "Carl Stovell",
+      "homepage": "https://ko-fi.com/turnpike47298",
+      "repository": "https://github.com/cstovi/NINA_SeeDrift",
+      "license": "MPL-2.0",
+      "licenseUrl": "https://www.mozilla.org/MPL/2.0/",
+      "changelogUrl": "https://github.com/cstovi/NINA_SeeDrift/releases",
+      "tags": ["Seestar", "drift", "plate-solve", "analysis"],
+      "minimumApplicationVersion": "3.2.0.9001",
+      "descriptions": {
+        "shortDescription": "Drift analysis for Seestar devices using NINA session logs.",
+        "longDescription": "SeeDrift reads NINA session logs and plate-solves every LIGHT frame to measure mount drift. Results are shown as ΔRA/ΔDec arcseconds in an interactive HTML report with drift timelines, quality metrics, and per-target analytics.\n\nDither, center-after-drift, and SeeDither events are correlated from the NINA sequencer log. Star-shape and walking-noise drift risk are summarized separately. Optional preview videos with a drift reticle overlay can be generated using the embedded FFmpeg.\n\nReports are stored in a local library and can be exported or compared. If you use and like anything I've done, support on Ko-fi (https://ko-fi.com/turnpike47298) is appreciated to encourage me to keep going!",
+        "featuredImageUrl": "https://i.ibb.co/PsM1CDGS/Screenshot-2026-05-08-203201.png",
+        "screenshotUrl": "",
+        "altScreenshotUrl": ""
+      },
+      "transitional": true
+    }
+  ]
+}

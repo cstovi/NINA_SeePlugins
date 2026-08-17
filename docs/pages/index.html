@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NINA See Plugins — by Carl Stovell</title>
+  <meta name="description" content="A combined NINA plugin repository for Carl Stovell's See plugins: SeeDew, SeeDark, SeeDither, and SeeDrift." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="./">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span class="brand-name">See Plugins</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#plugins">Plugins</a>
+      <a href="#install">Install</a>
+      <a href="#support">Support</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <p class="eyebrow">NINA plugin repository</p>
+      <h1 class="hero-title">
+        One repository for
+        <span class="accent">Carl Stovell's</span>
+        See plugins
+      </h1>
+      <p class="hero-sub">
+        A combined home for the SeeDew, SeeDark, SeeDither, and SeeDrift plugins —
+        each one built to make a Seestar telescope a little easier to run in NINA.
+      </p>
+
+      <div class="repo-box">
+        <span class="repo-label">Plugin repository URL</span>
+        <div class="repo-row">
+          <code class="repo-url" id="repoUrl">https://cstovi.github.io/NINA_SeePlugins</code>
+          <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy repository URL">
+            <span class="copy-icon" aria-hidden="true">⧉</span>
+            <span class="copy-text" id="copyText">Copy</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-foot">
+        <span class="pill">NINA 3.x</span>
+        <span class="pill">Seestar</span>
+        <span class="pill">Free &amp; open source</span>
+      </div>
+    </section>
+
+    <!-- Install path -->
+    <section class="section reveal" id="install">
+      <h2 class="section-title">Add the repository in NINA</h2>
+      <ol class="steps">
+        <li><span class="step-num">1</span><p>Open <strong>Options</strong> in NINA</p></li>
+        <li><span class="step-num">2</span><p>Go to <strong>Plugins</strong></p></li>
+        <li><span class="step-num">3</span><p>Open <strong>Plugin Repositories</strong></p></li>
+        <li><span class="step-num">4</span><p>Press <strong>Add</strong> and paste the URL above</p></li>
+      </ol>
+      <p class="note">
+        Once added, the plugins appear in the Plugins list for you to install and enable.
+      </p>
+    </section>
+
+    <!-- Plugin cards -->
+    <section class="section reveal" id="plugins">
+      <h2 class="section-title">The plugins</h2>
+      <div class="grid">
+
+        <a class="card" href="https://github.com/cstovi/NINA_SeeDew" target="_blank" rel="noopener">
+          <div class="card-media">
+            <img src="https://i.ibb.co/jkMX7y6m/See-Dew.png" alt="SeeDew" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">SeeDew</h3>
+            <p class="card-desc">Automatically turns the Seestar dew heater on and off based on the temperature/dew point margin.</p>
+            <span class="card-link">View on GitHub →</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/cstovi/NINA_SeeDark" target="_blank" rel="noopener">
+          <div class="card-media">
+            <img src="https://i.ibb.co/NdXb8D39/seedark.png" alt="SeeDark" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">SeeDark</h3>
+            <p class="card-desc">Captures master darks only when needed, and stacks median masters from raw darks.</p>
+            <span class="card-link">View on GitHub →</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/cstovi/NINA_SeeDither" target="_blank" rel="noopener">
+          <div class="card-media">
+            <img src="https://i.ibb.co/v6C6vXjp/seedither.jpg" alt="SeeDither" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">SeeDither</h3>
+            <p class="card-desc">Absolute GoTo coordinate-offset dithering for Seestar S30/S50 mounts — no guider required.</p>
+            <span class="card-link">View on GitHub →</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/cstovi/NINA_SeeDrift" target="_blank" rel="noopener">
+          <div class="card-media">
+            <img src="https://i.ibb.co/PsM1CDGS/Screenshot-2026-05-08-203201.png" alt="SeeDrift" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">SeeDrift</h3>
+            <p class="card-desc">Drift analysis for Seestar devices using NINA session logs, with an interactive HTML report.</p>
+            <span class="card-link">View on GitHub →</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Manual install / config note -->
+    <section class="section section--compact reveal">
+      <div class="manual">
+        <h2 class="section-title">Existing manual installs</h2>
+        <p>
+          Switching to this repository should not remove your plugin settings. The See plugins store
+          settings outside the plugin install folder, under
+          <code>%LOCALAPPDATA%\NINA\SeeDew</code>, <code>SeeDark</code>, <code>SeeDither</code>, and <code>SeeDrift</code>.
+        </p>
+        <p>
+          If you previously copied DLLs manually, NINA should recognize matching plugins by their plugin GUID
+          and show them as installed or updateable. If you ever see duplicates, remove only the old manual plugin
+          DLL/folder under <code>%LOCALAPPDATA%\NINA\Plugins\3.0.0</code>. Do not delete the separate settings
+          folders unless you intentionally want to reset configuration.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="support">
+    <p class="footer-line">
+      If you like these plugins,
+      <a href="https://ko-fi.com/turnpike47298" target="_blank" rel="noopener">buy me a Ko-fi</a>.
+    </p>
+    <p class="footer-meta">
+      NINA fetches the plugin manifest at <a href="plugins/manifests">/plugins/manifests</a> · See Plugins · by Carl Stovell
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

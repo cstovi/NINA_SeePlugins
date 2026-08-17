@@ -1,0 +1,57 @@
+# Regenerates the NINA combined plugin manifest from the latest GitHub
+# releases of each plugin repo, then deploys docs/pages to GitHub Pages.
+#
+# The site root is docs/pages, so NINA fetches the manifest at:
+#   https://<owner>.github.io/<repo>/plugins/manifests
+#
+# Triggers:
+#   - push to main
+#   - workflow_dispatch (manual)
+#   - repository_dispatch with type "release" (e.g. fired by a plugin repo's
+#     release workflow after it publishes a new release)
+name: Generate & Deploy Plugin Manifests
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [release]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate manifests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/generate-manifests.mjs
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/pages
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
