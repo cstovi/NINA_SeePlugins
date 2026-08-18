@@ -41,7 +41,7 @@
         "screenshotUrl": "",
         "altScreenshotUrl": ""
       },
-      "transitional": true
+      "transitional": false
     },
     {
       "repo": "cstovi/NINA_SeeDither",
@@ -62,7 +62,7 @@
         "screenshotUrl": "",
         "altScreenshotUrl": ""
       },
-      "transitional": true
+      "transitional": false
     },
     {
       "repo": "cstovi/NINA_SeeDrift",
@@ -83,7 +83,7 @@
         "screenshotUrl": "",
         "altScreenshotUrl": ""
       },
-      "transitional": true
+      "transitional": false
     }
   ]
 }

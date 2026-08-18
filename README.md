@@ -82,3 +82,5 @@ Set `GITHUB_TOKEN` in the environment to avoid GitHub API rate limits.
 1. Add or edit its entry in `config/plugins.json` (GUID must match the
    plugin's `AssemblyInfo.cs`).
 2. Run the script locally to verify, or push and let CI regenerate + deploy.
+
+For the full maintenance/release workflow, see [MAINTENANCE.md](MAINTENANCE.md).
