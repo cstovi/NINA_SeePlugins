@@ -4,7 +4,7 @@
     "Identifier": "A5E7F3C1-2D4B-4A8E-9F1C-3B6D7E8A0F2C",
     "Version": {
       "Major": 1,
-      "Minor": 6,
+      "Minor": 8,
       "Patch": 0,
       "Build": 0
     },
@@ -34,9 +34,9 @@
       "AltScreenshotURL": ""
     },
     "Installer": {
-      "URL": "https://github.com/cstovi/NINA_SeeDark/releases/download/v1.6.0/NINA.Plugin.SeeDark.dll",
-      "Type": "DLL",
-      "Checksum": "5e3914796f0e712dfcf368dec313c527bbd9f089d3adc7cacb729be3fb943968",
+      "URL": "https://github.com/cstovi/NINA_SeeDark/releases/download/v1.8.0/NINA.Plugin.SeeDark-1.8.0.0.zip",
+      "Type": "ARCHIVE",
+      "Checksum": "16aecd03d266eb3b0847c5fbfee2605760d60b6891f867e2e073a896a9c3a3bb",
       "ChecksumType": "SHA256"
     }
   },
@@ -87,7 +87,7 @@
     "Identifier": "c4d2e5a1-7b3f-4e9d-9f2a-6f1c8b9a3d11",
     "Version": {
       "Major": 1,
-      "Minor": 6,
+      "Minor": 7,
       "Patch": 0,
       "Build": 0
     },
@@ -117,9 +117,9 @@
       "AltScreenshotURL": ""
     },
     "Installer": {
-      "URL": "https://github.com/cstovi/NINA_SeeDither/releases/download/v1.6.0/NINA.Plugin.SeeDither.dll",
-      "Type": "DLL",
-      "Checksum": "2d1076637cf76f1d3bbaddf0ab2786dd65584e65311ce8eb4bff031f433fa2ac",
+      "URL": "https://github.com/cstovi/NINA_SeeDither/releases/download/v1.7.0/NINA.Plugin.SeeDither-1.7.0.0.zip",
+      "Type": "ARCHIVE",
+      "Checksum": "4dd44f003c5e2f52f83eb4f2da9f6e5dd1579c05ffd6a61398c033b9cdfde40c",
       "ChecksumType": "SHA256"
     }
   },
@@ -128,7 +128,7 @@
     "Identifier": "E8D4C2F1-6B7A-4E9D-8C3F-1A2B5D7E9F0C",
     "Version": {
       "Major": 1,
-      "Minor": 12,
+      "Minor": 13,
       "Patch": 0,
       "Build": 0
     },
@@ -158,9 +158,9 @@
       "AltScreenshotURL": ""
     },
     "Installer": {
-      "URL": "https://github.com/cstovi/NINA_SeeDrift/releases/download/v1.12.0/NINA.Plugin.SeeDrift.dll",
-      "Type": "DLL",
-      "Checksum": "a8470a343c282731e711e0108598a2e50ef0d6c4762cfe0d58ea9e17287a5237",
+      "URL": "https://github.com/cstovi/NINA_SeeDrift/releases/download/v1.13.0/NINA.Plugin.SeeDrift-1.13.0.0.zip",
+      "Type": "ARCHIVE",
+      "Checksum": "9c913f4eb493d52b674707d7f12853a5d69ed7b7151f9620978d63db37ee1798",
       "ChecksumType": "SHA256"
     }
   }
