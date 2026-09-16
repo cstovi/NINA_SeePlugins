@@ -87,7 +87,7 @@
     "Identifier": "c4d2e5a1-7b3f-4e9d-9f2a-6f1c8b9a3d11",
     "Version": {
       "Major": 1,
-      "Minor": 7,
+      "Minor": 9,
       "Patch": 0,
       "Build": 0
     },
@@ -117,9 +117,9 @@
       "AltScreenshotURL": ""
     },
     "Installer": {
-      "URL": "https://github.com/cstovi/NINA_SeeDither/releases/download/v1.7.0/NINA.Plugin.SeeDither-1.7.0.0.zip",
+      "URL": "https://github.com/cstovi/NINA_SeeDither/releases/download/v1.9.0/NINA.Plugin.SeeDither-1.9.0.0.zip",
       "Type": "ARCHIVE",
-      "Checksum": "4dd44f003c5e2f52f83eb4f2da9f6e5dd1579c05ffd6a61398c033b9cdfde40c",
+      "Checksum": "4837cb8537af1df6197bd75ef0bfcae45fb1c73a274dd9f515e48ad0362587df",
       "ChecksumType": "SHA256"
     }
   },
