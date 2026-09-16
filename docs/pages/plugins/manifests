@@ -119,7 +119,7 @@
     "Installer": {
       "URL": "https://github.com/cstovi/NINA_SeeDither/releases/download/v1.9.0/NINA.Plugin.SeeDither-1.9.0.0.zip",
       "Type": "ARCHIVE",
-      "Checksum": "4837cb8537af1df6197bd75ef0bfcae45fb1c73a274dd9f515e48ad0362587df",
+      "Checksum": "67586ee837e616c39f636948c64dc825d1edcc480138b5a3e55f2590c551dd50",
       "ChecksumType": "SHA256"
     }
   },
