@@ -27,6 +27,13 @@ release.
 - **`.github/workflows/pages.yml`** — GitHub Actions workflow that regenerates
   the manifest and deploys `docs/pages` to GitHub Pages. It runs on `push` to
   `main`, `workflow_dispatch`, and `repository_dispatch` with type `release`.
+- **Auto-refresh on release** — each plugin repo's release workflow ends with a
+  `repository_dispatch` (type `release`) to this repo, so publishing a plugin
+  release automatically regenerates and redeploys the manifest. Each plugin repo
+  needs a `SEEPLUGINS_DISPATCH_TOKEN` secret (a PAT with `repo` scope on this
+  repo). If that secret is absent, the plugin release still publishes its
+  assets but the manifest is **not** refreshed automatically — trigger a manual
+  `workflow_dispatch` instead. See [MAINTENANCE.md](MAINTENANCE.md) for details.
 
 ## NINA repository URL
 

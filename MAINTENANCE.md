@@ -135,7 +135,15 @@ When one of the plugin repos has a new plugin release:
 
    Some repos may also keep uploading the raw DLL for manual-download compatibility.
 
-6. Refresh this shared manifest repo after the release assets are live:
+6. After publishing the assets, the plugin workflow fires a `repository_dispatch`
+   event (type `release`) at `cstovi/NINA_SeePlugins`. The `Generate & Deploy
+   Plugin Manifests` workflow picks it up and regenerates + redeploys the
+   manifest automatically. **No manual refresh is needed** — skip to the
+   verification step below.
+
+   If the dispatch did not run (e.g. the `SEEPLUGINS_DISPATCH_TOKEN` secret is
+   missing, see below), refresh this shared manifest repo manually after the
+   release assets are live:
 
    ```powershell
    cd ../NINA_SeePlugins
@@ -147,6 +155,45 @@ When one of the plugin repos has a new plugin release:
 
 7. Wait for the `Generate & Deploy Plugin Manifests` workflow to pass.
 8. Verify the live endpoint contains the new version and `Installer.Type: "ARCHIVE"`.
+
+## Automated refresh from plugin releases
+
+Each plugin repo's release workflow (`.github/workflows/release.yml`) now ends
+with a `repository_dispatch` step (`peter-evans/repository-dispatch@v3`) that
+fires after its GitHub Release assets are published:
+
+```yaml
+- name: Notify NINA_SeePlugins to refresh
+  uses: peter-evans/repository-dispatch@v3
+  with:
+    token: ${{ secrets.SEEPLUGINS_DISPATCH_TOKEN }}
+    repository: cstovi/NINA_SeePlugins
+    event-type: release
+    client-payload: '{"repo": "${{ github.repository }}", "ref": "${{ github.ref_name }}"}'
+```
+
+This triggers the `Generate & Deploy Plugin Manifests` workflow here, which
+regenerates the manifest from the latest releases and redeploys the site, so
+NINA sees the new version without any manual step.
+
+### `SEEPLUGINS_DISPATCH_TOKEN` secret
+
+Every plugin repo must have a **`SEEPLUGINS_DISPATCH_TOKEN`** secret configured:
+Settings → Secrets and variables → Actions → New repository secret.
+
+- The value must be a GitHub **PAT with `repo` scope** that can create
+  `repository_dispatch` events on `cstovi/NINA_SeePlugins` (a classic PAT, or a
+  fine-grained token with Read/Write on the *Repository webhooks and events*
+  permission for that repo).
+- Because the token lives in each plugin repo's secrets, the plugin workflows
+  need **no extra `permissions:`** for the cross-repo dispatch — the PAT handles
+  it.
+- If the secret is **absent**, the release workflow still builds and publishes
+  the zip + sha256 assets (the publish step runs first), but the dispatch step
+  fails afterwards. The release itself is not rolled back, but `NINA_SeePlugins`
+  is **not** refreshed automatically — in that case trigger a manual
+  `workflow_dispatch` on `Generate & Deploy Plugin Manifests`, or run the manual
+  manifest refresh commands above.
 
 ## Editing the web page
 
@@ -223,7 +270,8 @@ Every listed plugin should have:
 ## Common failure cases
 
 - **Pages workflow fails with missing release asset**: the plugin release workflow may still be running, or the tag did not publish a zip.
-- **Manifest still shows an old version**: regenerate and commit `docs/pages/plugins/manifests` after the plugin release assets exist.
+- **Manifest still shows an old version**: the plugin release may have published before the dispatch step ran, or `SEEPLUGINS_DISPATCH_TOKEN` was missing so the dispatch failed. Check the plugin repo's release run for a failed `Notify NINA_SeePlugins to refresh` step, then trigger a manual `workflow_dispatch` (or run the manual refresh) once the assets exist.
+- **`Notify NINA_SeePlugins to refresh` step fails**: the `SEEPLUGINS_DISPATCH_TOKEN` secret is missing or the PAT lacks `repo` scope / access to `cstovi/NINA_SeePlugins`. The release still published its assets; refresh the manifest manually or after fixing the secret.
 - **GitHub rejects workflow-file push**: local `gh` auth needs `workflow` scope.
 - **NINA does not offer update**: check the manifest `Identifier` GUID and `Version`; NINA matches by GUID and compares versions, not file dates.
 - **Duplicate plugin after switching from manual install**: old manual DLL may still be in an unusual plugin folder. Remove only the old plugin DLL/folder, not the `%LOCALAPPDATA%\NINA\See*` settings folder.
